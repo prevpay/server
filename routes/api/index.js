@@ -1,19 +1,15 @@
 const express = require('express');
-const preScript =  require('../../handlers/prereq');
-const axios = require('axios');
-const request = require('request');
 const { exec } = require('child_process');
 const router = express.Router();
+const bankCalls = require('./create-acc');
 
-router.post('/boleto', async (req,res) => {
-    try {
-        req.body.externalIdentifier = preScript.sequencial;
-        const data = await request.get('https://varcom-mp-api-01.matera.com/v1/payments'
-        ,req.body, { headers: { "Api-Access-Key": "813F6952-D615-4E5C-9547-C31ABED75895", "Transaction-Hash": '69d4bf0efbca3340a34e9f693404e14aec782e5f5b0dfd7e74fc1961c1878fe3'}});
-        console.log(data);
-    } catch (error) {
-        res.send(error);
-    }
+router.post('/create-account', async (req,res) => {
+    exec(bankCalls, (error, stdout) => {
+        if(error) {
+            return res.send(error);
+         }
+         return res.send(stdout);
+    });
 });
 
 router.post('/proposta', async (req, res) => {

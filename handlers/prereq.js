@@ -1,6 +1,6 @@
 // Função para gerar número sequencial para evitar idempotência
 const CryptoJS = require("crypto-js");
-const SequencialKey = 'team-02-11990111401';
+const SequencialKey = '11990111401';
 const receiverOne = 60;
 const receiverTwo = 14.35;
 const wallet = 74.35;

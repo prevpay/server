@@ -1,0 +1,10 @@
+---
+    applications:
+        - no-route: false
+          host: "prevpay-server"
+          name: "prevpay-server"
+          memory: 128M
+          disk_quota: 128M
+          buildpack: sdk-for-nodejs
+          command: npm start
+          path: .
